@@ -1,9 +1,15 @@
-﻿class CommentBox extends React.Component {
+﻿const data = [
+    { id: 1, author: 'Daniel Lo Nigro', text: 'Hello ReactJS.NET World!' },
+    { id: 2, author: 'Pete Hunt', text: 'This is one comment' },
+    { id: 3, author: 'Jordan Walke', text: 'This is *another* comment' },
+];
+
+class CommentBox extends React.Component {
     render() {
         return (
             <div className="commentBox">
                 <h1>Comments</h1>
-                <CommentList />
+                <CommentList data={this.props.data} />
                 <CommentForm />
             </div>
 
@@ -13,17 +19,12 @@
 
 class CommentList extends React.Component {
     render() {
-        return (
-            <div className="commentList">
-                <Comment author="Daniel Lo Nigro">
-                    Hello ReactJS.NET World!
-                </Comment>
-                <Comment author="Pete Hunt">This is one comment</Comment>
-                <Comment author="Jordan Walke">
-                    This is *another* comment
-                </Comment>
-            </div>
-        );
+        const commentNodes = this.props.data.map(comment => (
+            <Comment author={comment.author} key={comment.id}>
+                {comment.text}
+            </Comment>
+        ));
+        return <div className="commentList">{commentNodes}</div>;
     }
 }
 
@@ -58,4 +59,4 @@ class Comment extends React.Component {
 
 
 
-ReactDOM.render(<CommentBox />, document.getElementById('content'));
+ReactDOM.render(<CommentBox data={data} />, document.getElementById('content'));
