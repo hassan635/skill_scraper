@@ -1,15 +1,29 @@
-﻿const data = [
-    { id: 1, author: 'Daniel Lo Nigro', text: 'Hello ReactJS.NET World!' },
-    { id: 2, author: 'Pete Hunt', text: 'This is one comment' },
-    { id: 3, author: 'Jordan Walke', text: 'This is *another* comment' },
-];
-
-class CommentBox extends React.Component {
+﻿class CommentBox extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { data: [] };
+    }
+    loadCommentsFromServer() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('get', this.props.url, true);
+        xhr.onload = () => {
+            const data = JSON.parse(xhr.responseText);
+            this.setState({ data: data });
+        };
+        xhr.send();
+    }
+    componentDidMount() {
+        this.loadCommentsFromServer();
+        window.setInterval(
+            () => this.loadCommentsFromServer(),
+            this.props.pollInterval,
+        );
+    }
     render() {
         return (
             <div className="commentBox">
                 <h1>Comments</h1>
-                <CommentList data={this.props.data} />
+                <CommentList data={this.state.data} />
                 <CommentForm />
             </div>
 
@@ -59,4 +73,4 @@ class Comment extends React.Component {
 
 
 
-ReactDOM.render(<CommentBox data={data} />, document.getElementById('content'));
+ReactDOM.render(<CommentBox url="/comments" pollInterval={2000} />, document.getElementById('content'));
