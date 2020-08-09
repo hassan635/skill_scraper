@@ -45,7 +45,11 @@ class CommentList extends React.Component {
 class CommentForm extends React.Component {
     render() {
         return (
-            <div className="commentForm">Hello, world! I am a CommentForm.</div>
+            <form className="commentForm">
+                <input type="text" placeholder="Your name" />
+                <input type="text" placeholder="Say something..." />
+                <input type="submit" value="Post" />
+            </form>
         );
     }
 }

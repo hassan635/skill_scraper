@@ -34,7 +34,7 @@ namespace SkiilScrape.Controllers
                     Id = 3,
                     Author = "Jordan Walke",
                     Text = "This is *another* comment update"
-                },
+                }
             };
         }
 
