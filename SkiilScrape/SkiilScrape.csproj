@@ -9,6 +9,8 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Library\" />
+    <Folder Include="Library\Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore" Version="3.5.6" />
